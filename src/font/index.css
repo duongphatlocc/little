@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "iCiel Koni";
+  src: url("./koni-black.ttf") format("truetype");
+  /* Nếu tệp font là .woff hoặc .woff2, bạn cần chỉnh sửa đường dẫn và định dạng tệp tương ứng */
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  /* Nếu tệp font là .woff hoặc .woff2, bạn cần chỉnh sửa đường dẫn và định dạng tệp tương ứng */
+}
+
+/* Ví dụ sử dụng font chữ iCiel Koni cho phần tử h1 */
+.bold-park {
+  font-family: "iCiel Koni", Arial, sans-serif;
+  /* Các thuộc tính CSS khác cho chữ đậm "Park" */
+}
+.montserrat {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
