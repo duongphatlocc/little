@@ -10,7 +10,6 @@ const App: React.FC = () => {
       <div>
         <Header />
         <PageContent></PageContent>
-       
       </div>
     </div>
   );
