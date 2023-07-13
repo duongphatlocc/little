@@ -2,10 +2,11 @@ import React from "react";
 import { Image, Menu, Space, Typography } from "antd";
 import logo from "../../image/logo.svg";
 import iconPhone from "../../image/iconPhone.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigte = useNavigate();
+  const location = useLocation();
 
   return (
     <div>
@@ -16,32 +17,56 @@ function Header() {
           preview={false}
           style={{ paddingBottom: "40px" }}
         />
-        <Space>
-          <Menu
-            onClick={(item) => {
-              navigte(item.key);
-              //
-            }}
+        <Space className="menu">
+          <Link
             style={{
-              paddingTop: "10px",
+              marginRight: "50px",
+              color: "#fff",
+              fontSize: "17px",
+              opacity: "opacity: 0.800000011920929",
+              fontStyle: "normal",
+              fontWeight: "600",
             }}
-            className="menu"
-            mode="horizontal" // Corrected spelling
-            items={[
-              {
-                label: "Trang chủ",
-                key: "/",
-              },
-              {
-                label: "Sự kiện",
-                key: "/sukien",
-              },
-              {
-                label: "Liên hệ",
-                key: "/lienhe",
-              },
-            ]}
-          ></Menu>
+            to="/"
+            className={`Home ${location.pathname === "/" ? "active" : ""}`}
+          >
+            Trang chủ
+          </Link>
+          <Link
+            style={{
+              marginLeft: "50px",
+              marginRight: "50px",
+              color: "#fff",
+              fontSize: "17px",
+              opacity: "opacity: 0.800000011920929",
+              fontStyle: "normal",
+              fontWeight: "600",
+            }}
+            to="/sukien"
+            className={`Party ${
+              location.pathname === "/sukien" ? "active" : ""
+            }`}
+          >
+            Sự kiện
+          </Link>
+          <Link
+            style={{
+              marginLeft: "50px",
+              marginRight: "50px",
+              color: "#fff",
+              fontSize: "17px",
+              opacity: "opacity: 0.800000011920929",
+              fontStyle: "normal",
+              fontWeight: "600",
+            }}
+            to="/lienhe"
+            className={`contact ${
+              location.pathname === "/lienhe" ? "active" : ""
+            }`}
+          >
+            Liên hệ
+          </Link>
+
           <Space>
             <Image
               className="Header-image"

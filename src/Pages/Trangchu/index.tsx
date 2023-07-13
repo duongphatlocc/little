@@ -1,34 +1,74 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Button, Image, Input, Space } from "antd";
 import { Typography } from "antd";
-import image2 from "../../image/image2.svg";
+import "firebase/database";
+import dayjs from "dayjs";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import backgroundanh from "../../image/backgroundanh.svg";
-import "../../font/index.css";
+import borderbackground from "../../image/borderbackground.svg";
+import calender from "../../image/calendar.svg";
+import down from "../../image/down.svg";
+import image2 from "../../image/image2.svg";
 import khicau1 from "../../image/khicau1.svg";
 import khicau2 from "../../image/khicau2.svg";
-import people from "../../image/people.svg";
-import sach from "../../image/sach.svg";
 import khicau3 from "../../image/khicau3.svg";
 import khicau4 from "../../image/khicau4.svg";
 import khicau5 from "../../image/khicau5.svg";
 import khicau6 from "../../image/khicau6.svg";
-import sao from "../../image/sao.svg";
 import Lisa from "../../image/Lisa.svg";
+import people from "../../image/people.svg";
+import sach from "../../image/sach.svg";
+import sao3 from "../../image/sao3.png";
 import titlebackground from "../../image/titlebackground.svg";
 import titlebackground2 from "../../image/titlebackground2.svg";
-import borderbackground from "../../image/borderbackground.svg";
-import down from "../../image/down.svg";
-import dayjs from "dayjs";
-import calender from "../../image/calendar.svg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "../../font/index.css";
+import { db } from "../../Api/firebase";
 import React from "react";
 function Trangchu() {
+  const [goiGiaDinh, setGoiGiaDinh] = useState("Gói gia đình");
+  const [soLuongVe, setSoLuongVe] = useState("");
+  const [hoTen, setHoTen] = useState("");
+  const [soDienThoai, setSoDienThoai] = useState("");
+  const [diaChiEmail, setDiaChiEmail] = useState("");
   const [date, setDate] = useState("");
 
-  const dateChange = (e: any) => {
+  const defaultNgaySuDung = "";
+
+  const dateChange = (
+    e: string | number | Date | dayjs.Dayjs | null | undefined
+  ) => {
     setDate(dayjs(e).format("DD/MM/YYYY"));
   };
+
+  const handleBookTicket = () => {
+    const data = {
+      goiGiaDinh,
+      soLuongVe,
+      hoTen,
+      soDienThoai,
+      diaChiEmail,
+      ngaySuDung: date,
+    };
+
+    const bookingsCollection = db.collection("bookings");
+    bookingsCollection
+      .add(data)
+      .then(() => {
+        console.log("Data saved successfully!");
+        // Reset the input fields
+
+        setSoLuongVe("");
+        setHoTen("");
+        setSoDienThoai("");
+        setDiaChiEmail("");
+        setDate(defaultNgaySuDung);
+      })
+      .catch((error: any) => {
+        console.log("Error saving data:", error);
+      });
+  };
+
   return (
     <div className="bg">
       <Image
@@ -42,8 +82,6 @@ function Trangchu() {
           marginLeft: "25px",
           marginRight: "25px",
           borderRadius: "99px",
-          // borderBottomLeftRadius: "30%",
-          // borderBottomRightRadius: "2%",
         }}
       />
       <div className="Trangchu-image-damsen">
@@ -91,6 +129,7 @@ function Trangchu() {
         <Image src={khicau6} preview={false} style={{ width: "150px" }}></Image>
       </div>
       <div style={{ position: "relative" }}>
+        {/* Content */}
         <div className="bg-sach1-shadow"></div>
         <div className="bg-sach1"></div>
         <div className="bg-sach1-nen">
@@ -109,7 +148,7 @@ function Trangchu() {
           </div>
           <div className="content-book-left2">
             <Space>
-              <Image src={sao} preview={false}></Image>
+              <Image src={sao3} preview={false}></Image>
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
@@ -117,33 +156,38 @@ function Trangchu() {
 
             <br />
             <Space>
-              <Image src={sao} preview={false}></Image>
+              <Image src={sao3} preview={false}></Image>
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
             </Space>
             <br />
             <Space>
-              <Image src={sao} preview={false}></Image>
+              <Image src={sao3} preview={false}></Image>
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
             </Space>
             <br />
             <Space>
-              <Image src={sao} preview={false}></Image>
+              <Image src={sao3} preview={false}></Image>
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
             </Space>
           </div>
         </div>
+        {/* Booking form */}
         <div className="bg-sach2-shadow"></div>
         <div className="bg-sach2"></div>
         <div className="bg-sach2-nen">
           <div className="">
             <Space>
-              <Input className="input" value={"Gói gia đình"}></Input>
+              <Input
+                className="input"
+                value="Gói gia đình"
+                onChange={(e) => setGoiGiaDinh(e.target.value)}
+              />
               <Button className="bg-icon-button-1">
                 <Image
                   src={down}
@@ -153,18 +197,23 @@ function Trangchu() {
                     marginLeft: "-18px",
                     marginTop: "-5px",
                   }}
-                ></Image>
+                />
               </Button>
               <div className="bg-icon-button-1-1"></div>
             </Space>
 
             <Space>
-              <Input className="input1" placeholder="Số lượng vé"></Input>
+              <Input
+                className="input1"
+                placeholder="Số lượng vé"
+                value={soLuongVe}
+                onChange={(e) => setSoLuongVe(e.target.value)}
+              />
               <Input
                 className="input2"
                 placeholder="Ngày sử dụng"
                 value={date}
-              ></Input>
+              />
               <div className="bg-icon-button-2">
                 <div>
                   <DatePicker
@@ -182,13 +231,28 @@ function Trangchu() {
                     marginLeft: "8px",
                     marginTop: "-60px",
                   }}
-                ></Image>
+                />
               </div>
               <div className="bg-icon-button-2-2"></div>
             </Space>
-            <Input className="input3"></Input>
-            <Input className="input3"></Input>
-            <Input className="input3"></Input>
+            <Input
+              className="input3"
+              placeholder="Họ và tên"
+              value={hoTen}
+              onChange={(e) => setHoTen(e.target.value)}
+            />
+            <Input
+              className="input4"
+              placeholder="Số điện thoại"
+              value={soDienThoai}
+              onChange={(e) => setSoDienThoai(e.target.value)}
+            />
+            <Input
+              className="input5"
+              placeholder="Địa chỉ email"
+              value={diaChiEmail}
+              onChange={(e) => setDiaChiEmail(e.target.value)}
+            />
             <Button
               className="button bold-park"
               style={{
@@ -199,6 +263,7 @@ function Trangchu() {
                 fontWeight: "900",
                 lineHeight: "normal",
               }}
+              onClick={handleBookTicket}
             >
               Đặt vé
             </Button>
@@ -206,16 +271,16 @@ function Trangchu() {
           </div>
         </div>
 
-        {/* title backround red */}
+        {/* Title background red */}
         <div>
           <div className="title-background-2">
-            <Image src={titlebackground2} preview={false}></Image>
+            <Image src={titlebackground2} preview={false} />
           </div>
           <div className="title-background">
-            <Image src={titlebackground} preview={false}></Image>
+            <Image src={titlebackground} preview={false} />
           </div>
           <div className="borderbackground">
-            <Image src={borderbackground} preview={false}></Image>
+            <Image src={borderbackground} preview={false} />
           </div>
           <div className="title-background-red">
             <Typography.Text className="bold-park content-background-red ">
@@ -226,9 +291,10 @@ function Trangchu() {
       </div>
 
       <div className="image-lisa">
-        <Image src={Lisa} preview={false}></Image>
+        <Image src={Lisa} preview={false} />
       </div>
     </div>
   );
 }
+
 export default Trangchu;
