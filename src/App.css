@@ -30,10 +30,16 @@ body {
 }
 .Home.active,
 .Party.active,
-.contact.active {
+.Contact.active {
   border: 1.8px solid #fff;
   padding: 3px 15px;
   border-radius: 18px;
+  opacity: 1;
+}
+.Home,
+.Party,
+.Contact {
+  opacity: 0.800000011920929;
 }
 
 .bg {
@@ -347,6 +353,8 @@ body {
   box-shadow: #ffde32 none;
   margin-left: -0px;
   margin-top: 2px;
+  outline: none;
+  border: none;
 }
 .react-datepicker__input-container > input::-webkit-calendar-picker-indicator,
 .react-datepicker__input-container > input::-moz-calendar-picker-indicator,
@@ -373,6 +381,16 @@ div.react-datepicker {
 .react-datepicker__year-text--today {
   background-color: pink;
   border-radius: 16px;
+}
+.bg-icon-button-pay-shadow {
+  background-color: #ffd27b;
+  width: 35px;
+  height: 35px;
+  border-radius: 0.5rem;
+  position: absolute;
+  z-index: -1;
+  top: 238px;
+  left: 349px;
 }
 
 /* page lienhe */
@@ -1269,13 +1287,13 @@ div.react-datepicker {
   transform: rotate(180deg);
   position: relative;
   z-index: 1;
-  left: 1052px;
+  left: 1030px;
   top: 198px;
 }
 .card-thanhtoan-thanhcong {
   position: absolute;
   z-index: 1;
-  top: 50px;
+  top: 10px;
   left: 70px;
 }
 .card-ma-qr {
@@ -1294,7 +1312,7 @@ div.react-datepicker {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-left: 30px;
+  margin-left: 35px;
 }
 .card- {
   color: #000;
@@ -1304,5 +1322,68 @@ div.react-datepicker {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-left: 65px;
+  margin-left: 70px;
+}
+.slv {
+  position: absolute;
+  z-index: 1;
+  top: 380px;
+  left: 50px;
+}
+.trang {
+  position: absolute;
+  z-index: 1;
+  top: 380px;
+  left: 1050px;
+}
+.bg-red-left-shadow {
+  background-color: #bd000b;
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+  border-radius: 0.5rem;
+  top: 470px;
+  left: 400px;
+}
+.bg-red-left {
+  background-color: #ff000a;
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+  border-radius: 0.5rem;
+  top: 465px;
+  left: 400px;
+}
+.btn-taive {
+  margin-left: 5px;
+  margin-top: 10px;
+  color: var(--w, #fff);
+  text-align: center;
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+.bg-red-right-shadow {
+  background-color: #bd000b;
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+  border-radius: 0.5rem;
+  top: 470px;
+  left: 600px;
+}
+.bg-red-right {
+  background-color: #ff000a;
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+  border-radius: 0.5rem;
+  top: 465px;
+  left: 600px;
 }

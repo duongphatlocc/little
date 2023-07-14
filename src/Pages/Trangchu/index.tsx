@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Image, Input, Space } from "antd";
 import { Typography } from "antd";
-import "firebase/database";
 import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useDispatch } from "react-redux";
+import { createBooking, BookingData } from "../../Api/bookingSlice";
+import { useNavigate } from "react-router-dom";
 import backgroundanh from "../../image/backgroundanh.svg";
 import borderbackground from "../../image/borderbackground.svg";
 import calender from "../../image/calendar.svg";
@@ -23,8 +25,7 @@ import sao3 from "../../image/sao3.png";
 import titlebackground from "../../image/titlebackground.svg";
 import titlebackground2 from "../../image/titlebackground2.svg";
 import "../../font/index.css";
-import { db } from "../../Api/firebase";
-import React from "react";
+
 function Trangchu() {
   const [goiGiaDinh, setGoiGiaDinh] = useState("Gói gia đình");
   const [soLuongVe, setSoLuongVe] = useState("");
@@ -32,17 +33,20 @@ function Trangchu() {
   const [soDienThoai, setSoDienThoai] = useState("");
   const [diaChiEmail, setDiaChiEmail] = useState("");
   const [date, setDate] = useState("");
-
+  const navigate = useNavigate();
   const defaultNgaySuDung = "";
+  const dispatch: any = useDispatch();
 
-  const dateChange = (
-    e: string | number | Date | dayjs.Dayjs | null | undefined
-  ) => {
-    setDate(dayjs(e).format("DD/MM/YYYY"));
+  const dateChange = (e: Date | null) => {
+    if (e) {
+      setDate(dayjs(e).format("DD/MM/YYYY"));
+    } else {
+      setDate("");
+    }
   };
 
   const handleBookTicket = () => {
-    const data = {
+    const bookingData: BookingData = {
       goiGiaDinh,
       soLuongVe,
       hoTen,
@@ -51,18 +55,17 @@ function Trangchu() {
       ngaySuDung: date,
     };
 
-    const bookingsCollection = db.collection("bookings");
-    bookingsCollection
-      .add(data)
-      .then(() => {
-        console.log("Data saved successfully!");
-        // Reset the input fields
-
+    dispatch(createBooking(bookingData))
+      .then((action: any) => {
+        const bookingId = action.payload;
+        console.log("Data saved successfully with ID:", bookingId);
+        // Clear the form fields
         setSoLuongVe("");
         setHoTen("");
         setSoDienThoai("");
         setDiaChiEmail("");
         setDate(defaultNgaySuDung);
+        navigate(`/thanhtoan/${bookingId}`);
       })
       .catch((error: any) => {
         console.log("Error saving data:", error);
@@ -101,32 +104,32 @@ function Trangchu() {
         </Typography.Title>
       </div>
       <div className="Trangchu-khicau1">
-        <Image src={khicau1} preview={false} style={{ width: "100px" }}></Image>
+        <Image src={khicau1} preview={false} style={{ width: "100px" }} />
       </div>
       <div className="Trangchu-khicau2">
-        <Image src={khicau2} preview={false} style={{ width: "90px" }}></Image>
+        <Image src={khicau2} preview={false} style={{ width: "90px" }} />
       </div>
       <div className="Trangchu-people">
         <Image
           src={people}
           preview={false}
           style={{ width: "550px", marginLeft: "100px" }}
-        ></Image>
+        />
       </div>
       <div className="Trangchu-sach">
-        <Image src={sach} preview={false} style={{ width: "120px" }}></Image>
+        <Image src={sach} preview={false} style={{ width: "120px" }} />
       </div>
       <div className="Trangchu-khicau3">
-        <Image src={khicau3} preview={false}></Image>
+        <Image src={khicau3} preview={false} />
       </div>
       <div className="Trangchu-khicau4">
-        <Image src={khicau4} preview={false}></Image>
+        <Image src={khicau4} preview={false} />
       </div>
       <div className="Trangchu-khicau5">
-        <Image src={khicau5} preview={false}></Image>
+        <Image src={khicau5} preview={false} />
       </div>
       <div className="Trangchu-khicau6">
-        <Image src={khicau6} preview={false} style={{ width: "150px" }}></Image>
+        <Image src={khicau6} preview={false} style={{ width: "150px" }} />
       </div>
       <div style={{ position: "relative" }}>
         {/* Content */}
@@ -148,29 +151,28 @@ function Trangchu() {
           </div>
           <div className="content-book-left2">
             <Space>
-              <Image src={sao3} preview={false}></Image>
-              <Typography.Text className="content-book-start montserrat">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-              </Typography.Text>
-            </Space>
-
-            <br />
-            <Space>
-              <Image src={sao3} preview={false}></Image>
+              <Image src={sao3} preview={false} />
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
             </Space>
             <br />
             <Space>
-              <Image src={sao3} preview={false}></Image>
+              <Image src={sao3} preview={false} />
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
             </Space>
             <br />
             <Space>
-              <Image src={sao3} preview={false}></Image>
+              <Image src={sao3} preview={false} />
+              <Typography.Text className="content-book-start montserrat">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+              </Typography.Text>
+            </Space>
+            <br />
+            <Space>
+              <Image src={sao3} preview={false} />
               <Typography.Text className="content-book-start montserrat">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
               </Typography.Text>
@@ -201,7 +203,6 @@ function Trangchu() {
               </Button>
               <div className="bg-icon-button-1-1"></div>
             </Space>
-
             <Space>
               <Input
                 className="input1"

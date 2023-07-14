@@ -11,11 +11,14 @@ interface Item {
 }
 
 interface AppState {
+  [x: string]: any;
+  booking: any;
   items: Item[];
 }
 
 const initialState: AppState = {
   items: [],
+  booking: undefined
 };
 
 const appSlice = createSlice({

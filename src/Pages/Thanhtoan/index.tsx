@@ -1,21 +1,75 @@
 import Background from "../../Component/SlideMenu";
-import { Typography, Image, Space, Input } from "antd";
+import { Typography, Image, Space, Input, Button } from "antd";
 import sach from "../../image/sach.svg";
 import Trini from "../../image/Trini.svg";
 import vecong from "../../image/vecong.svg";
 import calender from "../../image/calendar.svg";
 import DatePicker from "react-datepicker";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { db } from "../../Api/firebase";
+import { ThanhtoanData, updateThanhtoan } from "../../Api/thanhtoanSlice";
+
+import { useDispatch } from "react-redux";
+import { parse } from "path";
 
 function Thanhtoan() {
+  const { id } = useParams();
   const [date, setDate] = useState("");
+  const [thanhtoans, setThanhtoans] = useState<ThanhtoanData | null>(null);
+  const [soThe, setSoThe] = useState<string | undefined>();
+  const [cvv, setCvv] = useState<string | undefined>();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const price = Number(thanhtoans?.soLuongVe) * 180;
 
   const dateChange = (e: any) => {
     setDate(dayjs(e).format("DD/MM/YYYY"));
   };
+
+  const handleThanhtoan = () => {
+    if (soThe && cvv && id) {
+      const updateData = {
+        id: id,
+        diaChiEmail: thanhtoans?.diaChiEmail || "",
+        goiGiaDinh: thanhtoans?.goiGiaDinh || "",
+        hoTen: thanhtoans?.hoTen || "",
+        ngaySuDung: thanhtoans?.ngaySuDung || "",
+        soDienThoai: thanhtoans?.soDienThoai || "",
+        soLuongVe: thanhtoans?.soLuongVe || "",
+        soThe: soThe,
+        cvv: cvv,
+        image:
+          "https://firebasestorage.googleapis.com/v0/b/little-28456.appspot.com/o/qr.svg?alt=media&token=d272cc2c-b888-4e35-a504-c7ec3b706a02",
+        ma: "ALT20210501",
+        tenVe: "VÉ CỔNG",
+      };
+
+      dispatch(updateThanhtoan(updateData) as any);
+      navigate(`/thanhtoanthanhcong/${id}`); // Navigate to "thanhtoanthanhcong" page with the ID parameter
+    }
+  };
+
+  useEffect(() => {
+    async function fetchThanhtoan() {
+      try {
+        const thanhtoanRef = db.collection("bookings").doc(id);
+        const dataRef = await thanhtoanRef.get();
+        if (dataRef.exists) {
+          const data = dataRef.data() as ThanhtoanData;
+          setThanhtoans(data);
+          console.log(id);
+        } else {
+          console.log("error");
+        }
+      } catch (err) {}
+    }
+    fetchThanhtoan();
+  }, [id]);
+
   return (
     <div>
       <Background />
@@ -38,65 +92,87 @@ function Thanhtoan() {
         className="thanh-toan-sach"
         style={{ height: "440px" }}
       ></Image>
+
       <div>
         <div className="thanh-toan-bg-left-shadow"></div>
         <div className="thanh-toan-bg-left"></div>
-        <div className="thanh-toan-bg-left-content">
-          <Image src={vecong} preview={false} className="vecong"></Image>
-          <Typography.Title
-            className="bold-park vecong-thanh-toan"
-            style={{
-              color: "#fff",
-              fontSize: "24px",
-              fontStyle: "normal",
-              fontWeight: "900",
-              lineHeight: "normal",
-            }}
-          >
-            VÉ CỔNG - VÉ GIA ĐÌNH
-          </Typography.Title>
-          <Space>
-            <Typography.Text className="group-text-1">
-              Số tiền thanh toán
-            </Typography.Text>
-            <Typography.Text
-              className="group-text-1"
-              style={{ marginLeft: "50px" }}
+        <div>
+          <div className="thanh-toan-bg-left-content">
+            <Image src={vecong} preview={false} className="vecong"></Image>
+            <Typography.Title
+              className="bold-park vecong-thanh-toan"
+              style={{
+                color: "#fff",
+                fontSize: "24px",
+                fontStyle: "normal",
+                fontWeight: "900",
+                lineHeight: "normal",
+              }}
             >
-              Số lượng vé
-            </Typography.Text>
-            <Typography.Text
-              className="group-text-1"
-              style={{ marginLeft: "40px" }}
-            >
-              Ngày sử dụng
-            </Typography.Text>
-          </Space>
-          <Space>
-            <Input className="group-input-1"></Input>
-            <Input className="input-thanhtoan-1"></Input>vé
-            <Input className="input-thanhtoan-2"></Input>
-          </Space>
+              VÉ CỔNG - VÉ GIA ĐÌNH
+            </Typography.Title>
+            <Space>
+              <Typography.Text className="group-text-1">
+                Số tiền thanh toán
+              </Typography.Text>
+              <Typography.Text
+                className="group-text-1"
+                style={{ marginLeft: "50px" }}
+              >
+                Số lượng vé
+              </Typography.Text>
+              <Typography.Text
+                className="group-text-1"
+                style={{ marginLeft: "40px" }}
+              >
+                Ngày sử dụng
+              </Typography.Text>
+            </Space>
+            <Space>
+              <Input
+                className="group-input-1"
+                value={`${price.toFixed(3)}  VNĐ`}
+              ></Input>
+              <Input
+                className="input-thanhtoan-1"
+                value={thanhtoans?.soLuongVe}
+              ></Input>
+              vé
+              <Input
+                className="input-thanhtoan-2"
+                value={thanhtoans?.ngaySuDung}
+              ></Input>
+            </Space>
 
-          <div style={{ marginTop: "5px" }}>
-            <Typography.Text className="group-text-1">
-              Thông tin liên hệ
-            </Typography.Text>
-            <br />
-            <Input className="input-thanhtoan-3"></Input>
-          </div>
-          <div style={{ marginTop: "5px" }}>
-            <Typography.Text className="group-text-1">
-              Điện thoại
-            </Typography.Text>
-            <br />
-            <Input className="group-input-1"></Input>
-          </div>
+            <div style={{ marginTop: "5px" }}>
+              <Typography.Text className="group-text-1">
+                Thông tin liên hệ
+              </Typography.Text>
+              <br />
+              <Input
+                className="input-thanhtoan-3"
+                value={thanhtoans?.hoTen}
+              ></Input>
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              <Typography.Text className="group-text-1">
+                Điện thoại
+              </Typography.Text>
+              <br />
+              <Input
+                className="group-input-1"
+                value={thanhtoans?.soDienThoai}
+              ></Input>
+            </div>
 
-          <div style={{ marginTop: "5px" }}>
-            <Typography.Text className="group-text-1">Email</Typography.Text>
-            <br />
-            <Input className="input-thanhtoan-3"></Input>
+            <div style={{ marginTop: "5px" }}>
+              <Typography.Text className="group-text-1">Email</Typography.Text>
+              <br />
+              <Input
+                className="input-thanhtoan-3"
+                value={thanhtoans?.diaChiEmail}
+              ></Input>
+            </div>
           </div>
         </div>
 
@@ -127,7 +203,11 @@ function Thanhtoan() {
           <div style={{ marginTop: "10px" }}>
             <Typography.Text className="group-text-2">Số thẻ</Typography.Text>
             <br />
-            <Input className="group-input-2"></Input>
+            <Input
+              className="group-input-2"
+              value={soThe}
+              onChange={(e) => setSoThe(e.target.value)}
+            ></Input>
           </div>
           <div style={{ marginTop: "5px" }}>
             <Typography.Text className="group-text-2">
@@ -143,6 +223,7 @@ function Thanhtoan() {
             <br />
             <Space>
               <Input className="group-input-3" value={date}></Input>
+              <div className="bg-icon-button-pay-shadow"></div>
               <div className="bg-icon-button-2" style={{ marginTop: "-5px" }}>
                 <div>
                   <DatePicker
@@ -167,13 +248,32 @@ function Thanhtoan() {
           <div style={{ marginTop: "5px" }}>
             <Typography.Text className="group-text-2">CVV/CVC</Typography.Text>
             <br />
-            <Input className="group-input-4"></Input>
+            <Input
+              className="group-input-4"
+              value={cvv}
+              onChange={(e) => setCvv(e.target.value)}
+            ></Input>
           </div>
           <div className="button-thanhtoan-shadow"></div>
           <div className="button-thanhtoan-bg-red">
-            <Typography.Text className="button-text-thanhtoan bold-park">
+            <Button
+              onClick={handleThanhtoan}
+              className="button-text-thanhtoan bold-park"
+              style={{
+                backgroundColor: "#ff000a",
+                color: "#fff",
+                fontSize: "24px",
+                fontStyle: "normal",
+                fontWeight: "900",
+                lineHeight: "normal",
+                width: "289px",
+                marginLeft: "0px",
+                borderRadius: "1rem",
+                height: "50px",
+              }}
+            >
               Thanh toán
-            </Typography.Text>
+            </Button>
           </div>
         </div>
       </div>
@@ -181,4 +281,5 @@ function Thanhtoan() {
     </div>
   );
 }
+
 export default Thanhtoan;

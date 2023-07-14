@@ -23,7 +23,7 @@ function Header() {
               marginRight: "50px",
               color: "#fff",
               fontSize: "17px",
-              opacity: "opacity: 0.800000011920929",
+
               fontStyle: "normal",
               fontWeight: "600",
             }}
@@ -38,7 +38,6 @@ function Header() {
               marginRight: "50px",
               color: "#fff",
               fontSize: "17px",
-              opacity: "opacity: 0.800000011920929",
               fontStyle: "normal",
               fontWeight: "600",
             }}
@@ -55,12 +54,12 @@ function Header() {
               marginRight: "50px",
               color: "#fff",
               fontSize: "17px",
-              opacity: "opacity: 0.800000011920929",
+
               fontStyle: "normal",
               fontWeight: "600",
             }}
             to="/lienhe"
-            className={`contact ${
+            className={`Contact ${
               location.pathname === "/lienhe" ? "active" : ""
             }`}
           >
