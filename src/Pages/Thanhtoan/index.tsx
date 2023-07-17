@@ -1,27 +1,25 @@
 import Background from "../../Component/SlideMenu";
-import { Typography, Image, Space, Input, Button } from "antd";
+import { Typography, Image, Space, Input, Button, Modal } from "antd";
 import sach from "../../image/sach.svg";
 import Trini from "../../image/Trini.svg";
 import vecong from "../../image/vecong.svg";
 import calender from "../../image/calendar.svg";
 import DatePicker from "react-datepicker";
 import { useNavigate, useParams } from "react-router-dom";
-
 import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { db } from "../../Api/firebase";
-import { ThanhtoanData, updateThanhtoan } from "../../Api/thanhtoanSlice";
-
+import { db } from "../../firebase/firebase";
+import { ThanhtoanData, updateThanhtoan } from "../../firebase/thanhtoanSlice";
 import { useDispatch } from "react-redux";
-import { parse } from "path";
+import "../../css/thanhtoan.css";
 
 function Thanhtoan() {
   const { id } = useParams();
   const [date, setDate] = useState("");
   const [thanhtoans, setThanhtoans] = useState<ThanhtoanData | null>(null);
-  const [soThe, setSoThe] = useState<string | undefined>();
-  const [cvv, setCvv] = useState<string | undefined>();
+  const [soThe, setSoThe] = useState<string | undefined>("");
+  const [cvv, setCvv] = useState<string | undefined>("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const price = Number(thanhtoans?.soLuongVe) * 180;
@@ -50,6 +48,13 @@ function Thanhtoan() {
 
       dispatch(updateThanhtoan(updateData) as any);
       navigate(`/thanhtoanthanhcong/${id}`); // Navigate to "thanhtoanthanhcong" page with the ID parameter
+    } else {
+      Modal.error({
+        title: "Lỗi xảy ra khi thanh toán",
+        content:
+          "Vui lòng kiểm tra lại thông tin liên hệ, thông tin thẻ và thử lại.",
+        cancelButtonProps: { style: { display: "none" } },
+      });
     }
   };
 
@@ -65,7 +70,9 @@ function Thanhtoan() {
         } else {
           console.log("error");
         }
-      } catch (err) {}
+      } catch (err) {
+        console.error(err);
+      }
     }
     fetchThanhtoan();
   }, [id]);
@@ -91,14 +98,13 @@ function Thanhtoan() {
         preview={false}
         className="thanh-toan-sach"
         style={{ height: "440px" }}
-      ></Image>
-
+      />
       <div>
-        <div className="thanh-toan-bg-left-shadow"></div>
-        <div className="thanh-toan-bg-left"></div>
+        <div className="thanh-toan-bg-left-shadow" />
+        <div className="thanh-toan-bg-left" />
         <div>
           <div className="thanh-toan-bg-left-content">
-            <Image src={vecong} preview={false} className="vecong"></Image>
+            <Image src={vecong} preview={false} className="vecong" />
             <Typography.Title
               className="bold-park vecong-thanh-toan"
               style={{
@@ -131,17 +137,17 @@ function Thanhtoan() {
             <Space>
               <Input
                 className="group-input-1"
-                value={`${price.toFixed(3)}  VNĐ`}
-              ></Input>
+                value={`${price.toFixed(3)} VNĐ`}
+              />
               <Input
                 className="input-thanhtoan-1"
                 value={thanhtoans?.soLuongVe}
-              ></Input>
+              />
               vé
               <Input
                 className="input-thanhtoan-2"
                 value={thanhtoans?.ngaySuDung}
-              ></Input>
+              />
             </Space>
 
             <div style={{ marginTop: "5px" }}>
@@ -149,10 +155,7 @@ function Thanhtoan() {
                 Thông tin liên hệ
               </Typography.Text>
               <br />
-              <Input
-                className="input-thanhtoan-3"
-                value={thanhtoans?.hoTen}
-              ></Input>
+              <Input className="input-thanhtoan-3" value={thanhtoans?.hoTen} />
             </div>
             <div style={{ marginTop: "5px" }}>
               <Typography.Text className="group-text-1">
@@ -162,7 +165,7 @@ function Thanhtoan() {
               <Input
                 className="group-input-1"
                 value={thanhtoans?.soDienThoai}
-              ></Input>
+              />
             </div>
 
             <div style={{ marginTop: "5px" }}>
@@ -171,19 +174,15 @@ function Thanhtoan() {
               <Input
                 className="input-thanhtoan-3"
                 value={thanhtoans?.diaChiEmail}
-              ></Input>
+              />
             </div>
           </div>
         </div>
 
-        <div className="thanh-toan-bg-right-shadow"></div>
-        <div className="thanh-toan-bg-right"></div>
+        <div className="thanh-toan-bg-right-shadow" />
+        <div className="thanh-toan-bg-right" />
         <div className="thanh-toan-bg-right-content">
-          <Image
-            src={vecong}
-            preview={false}
-            className="thongtin-thanhtoan"
-          ></Image>
+          <Image src={vecong} preview={false} className="thongtin-thanhtoan" />
           <Typography.Title
             style={{
               color: "#fff",
@@ -207,14 +206,14 @@ function Thanhtoan() {
               className="group-input-2"
               value={soThe}
               onChange={(e) => setSoThe(e.target.value)}
-            ></Input>
+            />
           </div>
           <div style={{ marginTop: "5px" }}>
             <Typography.Text className="group-text-2">
               Họ tên chủ thẻ
             </Typography.Text>
             <br />
-            <Input className="group-input-2"></Input>
+            <Input className="group-input-2" />
           </div>
           <div style={{ marginTop: "5px" }}>
             <Typography.Text className="group-text-2">
@@ -222,8 +221,8 @@ function Thanhtoan() {
             </Typography.Text>
             <br />
             <Space>
-              <Input className="group-input-3" value={date}></Input>
-              <div className="bg-icon-button-pay-shadow"></div>
+              <Input className="group-input-3" value={date} />
+              <div className="bg-icon-button-pay-shadow" />
               <div className="bg-icon-button-2" style={{ marginTop: "-5px" }}>
                 <div>
                   <DatePicker
@@ -241,7 +240,7 @@ function Thanhtoan() {
                     marginLeft: "8px",
                     marginTop: "-60px",
                   }}
-                ></Image>
+                />
               </div>
             </Space>
           </div>
@@ -252,9 +251,9 @@ function Thanhtoan() {
               className="group-input-4"
               value={cvv}
               onChange={(e) => setCvv(e.target.value)}
-            ></Input>
+            />
           </div>
-          <div className="button-thanhtoan-shadow"></div>
+          <div className="button-thanhtoan-shadow" />
           <div className="button-thanhtoan-bg-red">
             <Button
               onClick={handleThanhtoan}
@@ -277,7 +276,7 @@ function Thanhtoan() {
           </div>
         </div>
       </div>
-      <Image src={Trini} preview={false} className="Trini"></Image>
+      <Image src={Trini} preview={false} className="Trini" />
     </div>
   );
 }

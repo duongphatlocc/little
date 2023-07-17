@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Image, Typography } from "antd";
 import { useParams } from "react-router-dom";
 
-import { EventData } from "../../Api/eventSlice";
+import { EventData } from "../../firebase/eventSlice";
 import Background from "../../Component/SlideMenu";
 import framesukien2 from "../../image/framesukien2.svg";
 import leftflag from "../../image/leftflag.svg";
 import rightflag from "../../image/rightflag.svg";
 import calendaryellow from "../../image/calendaryellow.svg";
 
-import { db } from "../../Api/firebase";
+import { db } from "../../firebase/firebase";
+import "../../css/chitietsukien.css";
 
 function ChiTietSuKien() {
   const { id } = useParams<{ id: string }>();

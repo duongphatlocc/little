@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import Background from "../../Component/SlideMenu";
-import { Button, Input, Space, Typography } from "antd";
+import { Button, Input, Space, Typography, Modal } from "antd";
 import Alex from "../../image/Alex.svg";
 import { Image } from "antd";
 import address from "../../image/address.svg";
 import mail from "../../image/mail.svg";
 import telephone from "../../image/telephone.svg";
+import "../../css/lienhe.css";
+
 function Lienhe() {
-  const [isSent, setIsSent] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleContactSubmit = () => {
-    // Xử lý logic gửi liên hệ ở đây
-
-    // Sau khi gửi thành công, đặt isSent thành true
-    setIsSent(true);
+  const showModal = () => {
+    setIsModalVisible(true);
   };
 
-  const handleCloseModal = () => {
-    setIsSent(false);
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
+
   return (
     <div>
       <Background />
@@ -64,32 +64,24 @@ function Lienhe() {
           ></Input>
           <div className="lienhe-bg-button-guilienhe">
             <div className="lienhe-bg-button-guilienhe-shadow"></div>
-            {/* <Button className="bold-park lienhe-button-guilienhe">
+            <Button
+              className="bold-park lienhe-button-guilienhe"
+              onClick={showModal}
+            >
               Gửi liên hệ
-            </Button> */}
-            <div>
-              <Button
-                className="bold-park lienhe-button-guilienhe"
-                onClick={handleContactSubmit}
-              >
-                Gửi liên hệ
-              </Button>
-              {isSent && (
-                <div className="modal-overlay">
-                  <div className="modal-content">
-                    <div className="modal-close" onClick={handleCloseModal}>
-                      X
-                    </div>
-                    <div className="modal-message">
-                      <Typography.Text>
-                        Gửi liên hệ thành công. <br />
-                        Vui lòng kiên nhẫn đợi phản hồi từ chúng tôi, bạn nhé!
-                      </Typography.Text>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            </Button>
+            <Modal
+              visible={isModalVisible}
+              onCancel={handleCancel}
+              footer={null}
+              className="Modal"
+            >
+              <p>
+                Gửi liên hệ thành công.
+                <br />
+                Vui lòng kiên nhẫn đợi phản hồi từ chúng tôi, bạn nhé!
+              </p>
+            </Modal>
           </div>
         </div>
       </div>
@@ -156,4 +148,5 @@ function Lienhe() {
     </div>
   );
 }
+
 export default Lienhe;

@@ -3,11 +3,11 @@ import Background from "../../Component/SlideMenu";
 import { Typography, Image, Card, Space } from "antd";
 import Alvin from "../../image/Alvin.svg";
 import leftdown from "../../image/leftdown.svg";
-import qr from "../../image/qr.svg";
 import tich from "../../image/tich.svg";
-import { ThanhtoanData } from "../../Api/thanhtoanSlice";
+import { ThanhtoanData } from "../../firebase/thanhtoanSlice";
 import { useParams } from "react-router-dom";
-import { db } from "../../Api/firebase";
+import { db } from "../../firebase/firebase";
+import "../../css/thanhtoanthanhcong.css";
 
 function ThanhToanThanhCong() {
   const { id } = useParams();

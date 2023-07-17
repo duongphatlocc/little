@@ -1,0 +1,189 @@
+.title-thanh-toan {
+  position: absolute;
+  z-index: 1;
+  left: 600px;
+  top: 50px;
+}
+.thanh-toan-bg-left-shadow {
+  background-color: #ffca7b;
+  width: 700px;
+  height: 450px;
+  position: absolute;
+  z-index: -1;
+  top: 220px;
+  left: 170px;
+  border-radius: 2rem;
+}
+.thanh-toan-bg-left {
+  background-color: #fde8b3;
+  width: 700px;
+  height: 450px;
+  position: absolute;
+  z-index: 1;
+  top: 210px;
+  left: 170px;
+  border-radius: 2rem;
+}
+.thanh-toan-bg-left-content {
+  background-color: #fff6d4;
+  width: 680px;
+  height: 430px;
+  position: absolute;
+  z-index: 1;
+  top: 217px;
+  left: 178px;
+  border-radius: 2rem;
+  border: dashed #ffb489 3px;
+}
+.thanh-toan-sach {
+  position: relative;
+  z-index: 1;
+  top: 110px;
+  left: 825px;
+}
+.thanh-toan-bg-right-shadow {
+  background-color: #ffca7b;
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  z-index: -1;
+  top: 220px;
+  left: 893px;
+  border-radius: 1.7rem;
+}
+.thanh-toan-bg-right {
+  background-color: #fde8b3;
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  z-index: 1;
+  top: 210px;
+  left: 893px;
+  border-radius: 1.7rem;
+}
+.thanh-toan-bg-right-content {
+  background-color: #fff6d4;
+  width: 430px;
+  height: 430px;
+  position: absolute;
+  z-index: 1;
+  top: 217px;
+  left: 900px;
+  border-radius: 1.7rem;
+  border: dashed #ffb489 3px;
+}
+.Trini {
+  position: relative;
+  z-index: 1;
+  top: -295px;
+  left: -45px;
+}
+.vecong {
+  margin-top: -30px;
+  padding-left: 70px;
+}
+.vecong-thanh-toan {
+  position: absolute;
+  z-index: 1;
+  top: -30px;
+  left: 95px;
+}
+.group-text-1 {
+  color: var(--text, #23221f);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  margin-left: 70px;
+}
+.group-input-1 {
+  border-radius: 1rem;
+  margin-left: 65px;
+  height: 40px;
+  width: 190px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.input-thanhtoan-1 {
+  border-radius: 1rem;
+  height: 40px;
+  width: 80px;
+  margin-left: 20px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.input-thanhtoan-2 {
+  border-radius: 1rem;
+  height: 40px;
+  width: 190px;
+  margin-left: 38px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.input-thanhtoan-3 {
+  border-radius: 1rem;
+  height: 40px;
+  width: 300px;
+  margin-left: 65px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.thongtin-thanhtoan {
+  padding-left: 50px;
+  margin-top: -35px;
+}
+.group-text-2 {
+  color: var(--text, #23221f);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  margin-left: 40px;
+}
+.group-input-2 {
+  border-radius: 1rem;
+  margin-left: 40px;
+  height: 40px;
+  width: 335px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.group-input-3 {
+  border-radius: 1rem;
+  margin-left: 40px;
+  height: 40px;
+  width: 290px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.group-input-4 {
+  border-radius: 1rem;
+  margin-left: 40px;
+  height: 40px;
+  width: 80px;
+  box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.5) inset;
+}
+.button-thanhtoan-shadow {
+  background-color: #bd000b;
+  width: 290px;
+  height: 50px;
+  border-radius: 1rem;
+  margin-top: 18px;
+  margin-left: 70px;
+}
+.button-thanhtoan-bg-red {
+  background-color: #ff000a;
+  width: 290px;
+  height: 50px;
+  border-radius: 1rem;
+  position: absolute;
+
+  z-index: 1;
+  top: 360px;
+  left: 70px;
+}
+.button-text-thanhtoan {
+  color: var(--w, #fff);
+
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  margin-left: 60px;
+}

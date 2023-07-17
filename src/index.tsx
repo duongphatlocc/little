@@ -5,8 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./Api/store";
-
+import store from "./firebase/store";
+import "./css/trangchu.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

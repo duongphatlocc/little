@@ -1,0 +1,114 @@
+.frame-sukien-chitiet {
+  position: relative;
+  z-index: -1;
+  top: -90px;
+}
+.left-flag-sukienchitiet {
+  position: relative;
+  z-index: -1;
+
+  top: -710px;
+}
+.right-flag-sukienchitiet {
+  position: relative;
+  z-index: -1;
+  top: -950px;
+  left: 1070px;
+}
+.bg-sukien-chitiet-shadow {
+  position: absolute;
+  background-color: #ffca7b;
+  width: 1210px;
+  height: 470px;
+  z-index: -1;
+  left: 160px;
+  top: 215px;
+  border-radius: 2rem;
+}
+.bg-sukien-chitiet {
+  position: absolute;
+  background-color: #fde8b3;
+  width: 1210px;
+  height: 470px;
+  z-index: -1;
+  left: 160px;
+  top: 205px;
+
+  border-radius: 2rem;
+}
+.bg-sukien-chitiet-content {
+  position: absolute;
+  background-color: #fff6d4;
+  border-radius: 2rem;
+  border: dashed 4px #ffb489;
+  width: 1185px;
+  height: 440px;
+  z-index: 1;
+  left: 168px;
+  top: 215px;
+}
+.sukien-chitiet-content-1 {
+  position: absolute;
+
+  width: 300px;
+  height: 400px;
+  z-index: 1;
+  top: 15px;
+  left: 15px;
+}
+.sukien-chitiet-content-2 {
+  position: absolute;
+
+  width: 250px;
+  height: 400px;
+  z-index: 1;
+  left: 345px;
+  top: 15px;
+}
+.sukien-chitiet-content-3 {
+  position: absolute;
+
+  width: 250px;
+  height: 430px;
+  z-index: 1;
+  left: 630px;
+  top: 15px;
+}
+.sukien-chitiet-content-4 {
+  position: absolute;
+
+  width: 250px;
+  height: 400px;
+  z-index: 1;
+  left: 910px;
+  top: 15px;
+}
+.sukien-chitiet-calendar {
+  display: inline-flex;
+  margin-top: 20px;
+}
+.chitiet-content-2 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}
+.image-sukien-chitiet-content-3 {
+  border-radius: 1.5rem;
+}
+.text-sukien-chitiet-content-3 {
+  color: #000;
+  text-align: justify;
+  /* 18 medium */
+
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+.title-sukien-chitiet {
+  position: absolute;
+  z-index: 1;
+  top: 50px;
+  left: 670px;
+}

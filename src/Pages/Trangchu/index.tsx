@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
-import { createBooking, BookingData } from "../../Api/bookingSlice";
+import { createBooking, BookingData } from "../../firebase/bookingSlice";
 import { useNavigate } from "react-router-dom";
 import backgroundanh from "../../image/backgroundanh.svg";
 import borderbackground from "../../image/borderbackground.svg";

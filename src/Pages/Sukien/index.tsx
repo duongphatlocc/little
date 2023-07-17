@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, Button, Typography, Space, Image } from "antd";
-import { RootState } from "../../Api/reducer";
-import { fetchItems } from "../../Api/action";
+import { RootState } from "../../firebase/reducer";
+import { fetchItems } from "../../firebase/action";
 import Background from "../../Component/SlideMenu";
 import leftdown from "../../image/leftdown.svg";
 import Framesukien from "../../image/Framesukien.svg";
@@ -10,6 +10,7 @@ import leftflag from "../../image/leftflag.svg";
 import rightflag from "../../image/rightflag.svg";
 import calendaryellow from "../../image/calendaryellow.svg";
 import { useNavigate } from "react-router-dom";
+import "../../css/sukien.css";
 
 const Sukien: React.FC = () => {
   const items = useSelector((state: RootState) => state.items);
@@ -17,7 +18,7 @@ const Sukien: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchItems() );
+    dispatch(fetchItems());
   }, [dispatch]);
 
   const handleViewDetail = (id: string) => {
