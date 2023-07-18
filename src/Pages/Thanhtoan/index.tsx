@@ -1,10 +1,17 @@
 import Background from "../../Component/SlideMenu";
-import { Typography, Image, Space, Input, Button, Modal } from "antd";
+import {
+  Typography,
+  Image,
+  Space,
+  Input,
+  Button,
+  Modal,
+  DatePicker,
+} from "antd";
 import sach from "../../image/sach.svg";
 import Trini from "../../image/Trini.svg";
 import vecong from "../../image/vecong.svg";
 import calender from "../../image/calendar.svg";
-import DatePicker from "react-datepicker";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from "react";
@@ -13,21 +20,46 @@ import { db } from "../../firebase/firebase";
 import { ThanhtoanData, updateThanhtoan } from "../../firebase/thanhtoanSlice";
 import { useDispatch } from "react-redux";
 import "../../css/thanhtoan.css";
+import facesad from "../../image/facesad.svg";
 
 function Thanhtoan() {
   const { id } = useParams();
-  const [date, setDate] = useState("");
+  const [ngay, setNgay] = useState("");
   const [thanhtoans, setThanhtoans] = useState<ThanhtoanData | null>(null);
   const [soThe, setSoThe] = useState<string | undefined>("");
   const [cvv, setCvv] = useState<string | undefined>("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const price = Number(thanhtoans?.soLuongVe) * 180;
+  const gia = Number(thanhtoans?.soLuongVe) * 180;
+  const [cvv2, setCvv2] = useState("");
 
-  const dateChange = (e: any) => {
-    setDate(dayjs(e).format("DD/MM/YYYY"));
+  const ngayHetHan = (e: any) => {
+    setNgay(dayjs(e).format("DD/MM/YYYY"));
   };
 
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const cvvChieudai = value.length;
+
+    const sao = "*".repeat(cvvChieudai);
+
+    setCvv2(sao);
+    setCvv(value);
+  };
+  const handleSoTheChange = (e: any) => {
+    const { value } = e.target;
+    // Remove any non-numeric characters (e.g., spaces)
+    const khoangCach = value.replace(/\D/g, "");
+
+    // Format the input by adding a space after every 4 digits
+    let kyTu = "";
+    for (let i = 0; i < khoangCach.length; i += 4) {
+      kyTu += khoangCach.slice(i, i + 4) + " ";
+    }
+    kyTu = kyTu.trim();
+
+    setSoThe(kyTu);
+  };
   const handleThanhtoan = () => {
     if (soThe && cvv && id) {
       const updateData = {
@@ -50,10 +82,19 @@ function Thanhtoan() {
       navigate(`/thanhtoanthanhcong/${id}`); // Navigate to "thanhtoanthanhcong" page with the ID parameter
     } else {
       Modal.error({
-        title: "Lỗi xảy ra khi thanh toán",
-        content:
-          "Vui lòng kiểm tra lại thông tin liên hệ, thông tin thẻ và thử lại.",
-        cancelButtonProps: { style: { display: "none" } },
+        title: (
+          <div className="bg-vang">
+            <Image src={facesad} className="buon" preview={false}></Image>
+          </div>
+        ),
+        content: (
+          <div className="thongbaoloi">
+            <Typography.Text>
+              Hình như đã có lỗi xảy ra khi thanh toán... Vui lòng kiểm tra lại
+              thông tin liên hệ, thông tin thẻ và thử lại.
+            </Typography.Text>
+          </div>
+        ),
       });
     }
   };
@@ -137,7 +178,7 @@ function Thanhtoan() {
             <Space>
               <Input
                 className="group-input-1"
-                value={`${price.toFixed(3)} VNĐ`}
+                value={`${gia.toFixed(3)} VNĐ`}
               />
               <Input
                 className="input-thanhtoan-1"
@@ -205,7 +246,8 @@ function Thanhtoan() {
             <Input
               className="group-input-2"
               value={soThe}
-              onChange={(e) => setSoThe(e.target.value)}
+              onChange={handleSoTheChange}
+              maxLength={soThe?.length === 16 ? 20 : 23}
             />
           </div>
           <div style={{ marginTop: "5px" }}>
@@ -221,26 +263,25 @@ function Thanhtoan() {
             </Typography.Text>
             <br />
             <Space>
-              <Input className="group-input-3" value={date} />
+              <Input className="group-input-3" value={ngay} />
               <div className="bg-icon-button-pay-shadow" />
-              <div className="bg-icon-button-2" style={{ marginTop: "-5px" }}>
-                <div>
-                  <DatePicker
-                    className="date"
-                    popperClassName="custom-datepicker-popper"
-                    wrapperClassName="custom-datepicker-wrapper"
-                    onChange={dateChange}
-                  />
-                </div>
+              <div className="bg-ngay-het-han" style={{ marginTop: "-5px" }}>
                 <Image
                   src={calender}
                   preview={false}
                   style={{
                     width: "20px",
                     marginLeft: "8px",
-                    marginTop: "-60px",
+                    marginTop: "5px",
                   }}
                 />
+                <div>
+                  <DatePicker
+                    className="ngayhethan"
+                    onChange={ngayHetHan}
+                    style={{ opacity: "0" }}
+                  />
+                </div>
               </div>
             </Space>
           </div>
@@ -249,8 +290,10 @@ function Thanhtoan() {
             <br />
             <Input
               className="group-input-4"
-              value={cvv}
-              onChange={(e) => setCvv(e.target.value)}
+              value={cvv2} // Hiển thị dấu sao (•••)
+              onChange={handleCvvChange} // Xử lý thay đổi CVV/CVC và cập nhật hiển thị dấu sao
+              type="text" // Hiển thị dấu sao (do đã thay đổi trong handleCvvChange)
+              maxLength={3} // Giới hạn độ dài là 3 ký tự
             />
           </div>
           <div className="button-thanhtoan-shadow" />

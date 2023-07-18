@@ -7,8 +7,16 @@ import address from "../../image/address.svg";
 import mail from "../../image/mail.svg";
 import telephone from "../../image/telephone.svg";
 import "../../css/lienhe.css";
+import { useDispatch } from "react-redux";
+import { LienheData, createLienhe } from "../../firebase/lienheSlice";
 
 function Lienhe() {
+  const [ten, setTen] = useState("");
+  const [email, setEmail] = useState("");
+  const [soDienThoai, setSoDienThoai] = useState("");
+  const [diaChi, setDiaChi] = useState("");
+  const [loiNhan, setLoiNhan] = useState("");
+  const dispatch: any = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -17,6 +25,23 @@ function Lienhe() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+  const sukienLienHe = () => {
+    const lienheData: LienheData = {
+      ten,
+      email,
+      soDienThoai,
+      diaChi,
+      loiNhan,
+    };
+    dispatch(createLienhe(lienheData)).then(() => {
+      setTen("");
+      setEmail("");
+      setSoDienThoai("");
+      setDiaChi("");
+      setLoiNhan("");
+      showModal();
+    });
   };
 
   return (
@@ -48,25 +73,40 @@ function Lienhe() {
             posuere ex facilisis.{" "}
           </Typography.Text>
           <Space className="lienhe-input-ten-email">
-            <Input placeholder="Tên" className="lienhe-input-ten"></Input>
-            <Input placeholder="Email" className="lienhe-input-email"></Input>
+            <Input
+              placeholder="Tên"
+              className="lienhe-input-ten"
+              onChange={(e) => setTen(e.target.value)}
+            ></Input>
+            <Input
+              placeholder="Email"
+              className="lienhe-input-email"
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
           </Space>
           <Space className="lienhe-input-sdt-dc">
             <Input
               placeholder="Số điện thoại"
               className="lienhe-input-ten"
+              onChange={(e) => setSoDienThoai(e.target.value)}
             ></Input>
-            <Input placeholder="Địa chỉ" className="lienhe-input-email"></Input>
+            <Input
+              placeholder="Địa chỉ"
+              className="lienhe-input-email"
+              onChange={(e) => setDiaChi(e.target.value)}
+            ></Input>
           </Space>
           <Input
             placeholder="Lời nhắn"
             className="lienhe-input-loinhan"
+            onChange={(e) => setLoiNhan(e.target.value)}
           ></Input>
           <div className="lienhe-bg-button-guilienhe">
             <div className="lienhe-bg-button-guilienhe-shadow"></div>
             <Button
               className="bold-park lienhe-button-guilienhe"
-              onClick={showModal}
+              // onClick={showModal}
+              onClick={sukienLienHe}
             >
               Gửi liên hệ
             </Button>
@@ -74,7 +114,6 @@ function Lienhe() {
               visible={isModalVisible}
               onCancel={handleCancel}
               footer={null}
-              className="Modal"
             >
               <p>
                 Gửi liên hệ thành công.

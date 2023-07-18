@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Background from "../../Component/SlideMenu";
-import { Typography, Image, Card, Space } from "antd";
+import { Typography, Image, Card, Space, Button } from "antd";
 import Alvin from "../../image/Alvin.svg";
 import leftdown from "../../image/leftdown.svg";
 import tich from "../../image/tich.svg";
@@ -12,6 +12,8 @@ import "../../css/thanhtoanthanhcong.css";
 function ThanhToanThanhCong() {
   const { id } = useParams();
   const [thanhtoans, setThanhtoans] = useState<ThanhtoanData | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 4;
 
   useEffect(() => {
     async function fetchThanhtoan() {
@@ -33,8 +35,11 @@ function ThanhToanThanhCong() {
   }, [id]);
 
   const renderCards = (quantity: number) => {
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+
     const cards = [];
-    for (let i = 0; i < quantity; i++) {
+    for (let i = startIndex; i < Math.min(quantity, endIndex); i++) {
       cards.push(
         <Space>
           <Card
@@ -69,11 +74,20 @@ function ThanhToanThanhCong() {
             <Typography.Text className="card-">---</Typography.Text>
             <p>Ngày sử dụng: {thanhtoans?.ngaySuDung}</p>
             <Image src={tich} preview={false} style={{ paddingLeft: "65px" }} />
+            {/* Card content */}
           </Card>
         </Space>
       );
     }
     return cards;
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
   };
 
   return (
@@ -88,19 +102,25 @@ function ThanhToanThanhCong() {
         <Space>
           <div className="thanhtoan-thanhcong-bg-leftdown-shadow"></div>
           <div className="thanhtoan-thanhcong-bg-leftdown"></div>
-
-          <Image
-            src={leftdown}
-            preview={false}
-            className="thanhtoan-thanhcong-image-leftdown"
-          />
+          <div>
+            <Button
+              className="nut-trai"
+              disabled={currentPage === 1}
+              onClick={goToPreviousPage}
+            ></Button>
+            <Image
+              src={leftdown}
+              preview={false}
+              className="thanhtoan-thanhcong-image-leftdown"
+            />
+          </div>
 
           <div className="card-thanhtoan-thanhcong">
             {renderCards(Number(thanhtoans?.soLuongVe))}
           </div>
           <div>
-            <p className="slv">Số lượng vé :{thanhtoans?.soLuongVe}</p>
-            <p className="trang">Trang 1/3</p>
+            <p className="slv">Số lượng vé: {thanhtoans?.soLuongVe}</p>
+            <p className="trang">Trang {currentPage}/3</p>
           </div>
           <div>
             <div className="bg-red-left-shadow"></div>
@@ -112,10 +132,13 @@ function ThanhToanThanhCong() {
               <div className="bold-park btn-taive">Gửi Email</div>
             </div>
           </div>
-
           <div className="thanhtoan-thanhcong-bg-rightdown-shadow"></div>
           <div className="thanhtoan-thanhcong-bg-rightdown"></div>
-
+          <Button
+            className="nut-phai"
+            disabled={currentPage === 3}
+            onClick={goToNextPage}
+          ></Button>
           <Image
             src={leftdown}
             preview={false}

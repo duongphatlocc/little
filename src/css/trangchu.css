@@ -17,97 +17,97 @@
     rgba(255, 219, 126, 1),
     rgba(255, 122, 0, 1)
   );
-  width: 100%;
-  height: 725px;
+  width: auto;
+  height: auto;
   position: absolute; /* Thêm thuộc tính position: relative; */
-  margin-top: -50px;
+  margin-top: -3%;
   z-index: -1;
   border-radius: 3%;
 }
 .Trangchu-image-damsen {
   position: absolute;
-  top: 50px;
-  margin-left: 125px;
+  top: 7%;
+  margin-left: 9%;
   z-index: 1;
 }
 .Trangchu-text-damsen {
   position: absolute;
-  top: 20px;
+  top: 4%;
   z-index: 1;
-  margin-left: 300px;
+  margin-left: 20%;
 }
 .Trangchu-khicau1 {
   position: absolute;
   z-index: 1;
-  top: 100px;
-  margin-left: 600px;
+  top: 10%;
+  margin-left: 39%;
 }
 .Trangchu-khicau2 {
   position: absolute;
   z-index: 1;
-  top: 29px;
-  margin-left: 780px;
+  top: 5%;
+  margin-left: 51%;
 }
 .Trangchu-people {
   position: absolute;
   z-index: 1;
-  top: -20px;
-  margin-left: 740px;
+  top: -4%;
+  margin-left: 48%;
 }
 .Trangchu-sach {
   position: absolute;
   z-index: 1;
-  top: 217px;
-  margin-left: 860px;
+  top: 30%;
+  margin-left: 56%;
 }
 
 .Trangchu-khicau3 {
   position: absolute;
   z-index: 1;
-  top: 230px;
-  margin-left: 1400px;
+  top: 30%;
+  margin-left: 91.5%;
 }
 .Trangchu-khicau4 {
   position: absolute;
   z-index: 1;
-  top: 505px;
-  margin-left: 1300px;
+  top: 70%;
+  margin-left: 85%;
   width: 150px;
 }
 .Trangchu-khicau5 {
   position: absolute;
   z-index: 1;
-  top: 580px;
-  margin-left: 430px;
+  top: 82.5%;
+  margin-left: 30%;
 }
 .Trangchu-khicau6 {
   position: absolute;
   z-index: 1;
-  top: 165px;
-  margin-left: -15px;
+  top: 23%;
+  margin-left: -1%;
 }
 .bg-sach1 {
-  width: 700px;
+  width: 45.6%;
   height: 420px;
   background-color: #fde8b3;
   position: absolute;
-  top: -525px;
+  margin-top: -34%;
   z-index: 1;
-  margin-left: 200px;
+  margin-left: 13%;
   border-top-right-radius: 8%;
   border-bottom-right-radius: 8%;
   border-bottom-left-radius: 8%;
   border-top-left-radius: 8%;
 }
 .bg-sach1-shadow {
-  width: 700px;
+  width: 45.6%;
   height: 420px;
   background-color: #ffca7b;
   border-radius: 9%;
   position: absolute;
-  top: -512px;
+  margin-top: -33.2%;
   z-index: 1;
-  margin-left: 200px;
+  margin-left: 13%;
 }
 .bg-sach1-nen {
   width: 670px;
@@ -305,27 +305,33 @@
   width: 35px;
   height: 35px;
   border-radius: 8px;
+  position: absolute;
+  z-index: 1;
+  top: 95px;
 }
 .bg-icon-button-2-2 {
   background-color: #ffd27b;
-  margin-top: 20px;
+
   width: 35px;
   height: 35px;
   border-radius: 8px;
-  margin-left: -43px;
+  top: 110px;
+  left: 298px;
+  position: absolute;
+  z-index: -1;
 }
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+}
+
 .date {
-  background-color: #ffde32;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  border-color: #ffde32;
-  box-shadow: #ffde32 none;
-  margin-left: -0px;
-  margin-top: 2px;
-  outline: none;
-  border: none;
+  cursor: pointer;
 }
+
 .react-datepicker__input-container > input::-webkit-calendar-picker-indicator,
 .react-datepicker__input-container > input::-moz-calendar-picker-indicator,
 .react-datepicker__input-container > input::-ms-calendar-picker-indicator {
@@ -361,4 +367,53 @@ div.react-datepicker {
   z-index: -1;
   top: 238px;
   left: 349px;
+}
+.react-datepicker__day--today,
+.react-datepicker__month-text--today,
+.react-datepicker__quarter-text--today,
+.react-datepicker__year-text--today {
+  background-color: #ff8a00;
+}
+.react-datepicker__day-name {
+  color: var(--yellow-2, #ff8a00);
+  text-align: center;
+
+  /* 24 bold */
+
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 150% */
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker-dropdown
+  .ant-picker-panel
+  .ant-picker-footer {
+  display: none;
+}
+
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  position: absolute;
+  z-index: -1;
+  background-color: #ff8a00;
+  border-radius: 1rem;
+  border: none;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker-dropdown
+  .ant-picker-header {
+  border-bottom: none;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker-dropdown
+  .ant-picker-date-panel
+  .ant-picker-content
+  th {
+  color: var(--yellow-2, #ff8a00);
+  text-align: center;
+
+  /* 24 bold */
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 150% */
 }

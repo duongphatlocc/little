@@ -187,3 +187,48 @@
   line-height: normal;
   margin-left: 60px;
 }
+.bg-vang {
+  background-color: #ff8b15;
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  left: 0.1px;
+  top: -5px;
+  height: 50px;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+
+.buon {
+  position: relative;
+  z-index: 1;
+  top: -20px;
+  left: 80px;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-modal .ant-modal-content {
+  height: 170px;
+  border-radius: 2rem;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-btn-primary {
+  background-color: #fff;
+}
+.thongbaoloi {
+  margin-top: 20px;
+}
+.ngayhethan {
+  cursor: pointer;
+}
+.bg-ngay-het-han {
+  background-color: #ffde32;
+  width: 35px;
+  height: 35px;
+  border-radius: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  top: 238px;
+  left: 81.2%;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker {
+  width: 35px;
+  height: 35px;
+}

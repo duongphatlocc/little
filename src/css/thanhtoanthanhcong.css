@@ -98,7 +98,7 @@
   transform: rotate(180deg);
   position: relative;
   z-index: 1;
-  left: 1030px;
+  left: 1020px;
   top: 198px;
 }
 .card-thanhtoan-thanhcong {
@@ -197,4 +197,24 @@
   border-radius: 0.5rem;
   top: 465px;
   left: 600px;
+}
+.nut-phai {
+  background-color: #ffde32;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  left: 1120px;
+  top: 195px;
+}
+.nut-trai {
+  background-color: #ffde32;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  top: 195px;
+  left: 20px;
 }

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Image, Input, Space } from "antd";
+import { Button, DatePicker, Image, Input, Space } from "antd";
 import { Typography } from "antd";
 import dayjs from "dayjs";
-import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { createBooking, BookingData } from "../../firebase/bookingSlice";
@@ -26,6 +26,7 @@ import titlebackground from "../../image/titlebackground.svg";
 import titlebackground2 from "../../image/titlebackground2.svg";
 import "../../font/index.css";
 
+
 function Trangchu() {
   const [goiGiaDinh, setGoiGiaDinh] = useState("Gói gia đình");
   const [soLuongVe, setSoLuongVe] = useState("");
@@ -37,12 +38,9 @@ function Trangchu() {
   const defaultNgaySuDung = "";
   const dispatch: any = useDispatch();
 
-  const dateChange = (e: Date | null) => {
-    if (e) {
-      setDate(dayjs(e).format("DD/MM/YYYY"));
-    } else {
-      setDate("");
-    }
+  const dateChange = (date: any) => {
+    const datePicker = dayjs(date).format("DD/MMM/YYYY");
+    setDate(datePicker);
   };
 
   const handleBookTicket = () => {
@@ -216,23 +214,23 @@ function Trangchu() {
                 value={date}
               />
               <div className="bg-icon-button-2">
-                <div>
-                  <DatePicker
-                    className="date"
-                    onChange={dateChange}
-                    popperClassName="custom-datepicker-popper"
-                    wrapperClassName="custom-datepicker-wrapper"
-                  />
-                </div>
                 <Image
                   src={calender}
                   preview={false}
                   style={{
                     width: "20px",
                     marginLeft: "8px",
-                    marginTop: "-60px",
+                    marginTop: "5px",
                   }}
                 />
+                <div>
+                  <DatePicker
+                 
+                    className="date"
+                    onChange={dateChange}
+                    style={{ opacity: "0" }}
+                  />
+                </div>
               </div>
               <div className="bg-icon-button-2-2"></div>
             </Space>

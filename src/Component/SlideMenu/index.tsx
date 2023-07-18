@@ -20,7 +20,6 @@ function Background() {
           borderBottomRightRadius: "6.5rem",
         }}
       />
-      <Header />
     </div>
   );
 }

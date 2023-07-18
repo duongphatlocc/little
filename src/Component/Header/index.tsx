@@ -1,11 +1,10 @@
 import React from "react";
-import { Image, Menu, Space, Typography } from "antd";
+import { Image, Space, Typography } from "antd";
 import logo from "../../image/logo.svg";
 import iconPhone from "../../image/iconPhone.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
-  const navigte = useNavigate();
   const location = useLocation();
 
   return (
@@ -15,7 +14,7 @@ function Header() {
           className="Header-image"
           src={logo}
           preview={false}
-          style={{ paddingBottom: "40px" }}
+          style={{ paddingBottom: "2%" }}
         />
         <Space className="menu">
           <Link
