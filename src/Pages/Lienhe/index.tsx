@@ -9,6 +9,7 @@ import telephone from "../../image/telephone.svg";
 import "../../css/lienhe.css";
 import { useDispatch } from "react-redux";
 import { LienheData, createLienhe } from "../../firebase/lienheSlice";
+import TextArea from "antd/es/input/TextArea";
 
 function Lienhe() {
   const [ten, setTen] = useState("");
@@ -90,17 +91,20 @@ function Lienhe() {
               className="lienhe-input-ten"
               onChange={(e) => setSoDienThoai(e.target.value)}
             ></Input>
+
             <Input
               placeholder="Địa chỉ"
               className="lienhe-input-email"
               onChange={(e) => setDiaChi(e.target.value)}
             ></Input>
           </Space>
-          <Input
+
+          <TextArea
+            rows={4}
             placeholder="Lời nhắn"
             className="lienhe-input-loinhan"
             onChange={(e) => setLoiNhan(e.target.value)}
-          ></Input>
+          ></TextArea>
           <div className="lienhe-bg-button-guilienhe">
             <div className="lienhe-bg-button-guilienhe-shadow"></div>
             <Button

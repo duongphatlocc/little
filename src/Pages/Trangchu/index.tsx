@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, DatePicker, Image, Input, Space } from "antd";
+import { Button, ConfigProvider, DatePicker, Image, Input, Space } from "antd";
 import { Typography } from "antd";
 import dayjs from "dayjs";
 
@@ -25,7 +25,9 @@ import sao3 from "../../image/sao3.png";
 import titlebackground from "../../image/titlebackground.svg";
 import titlebackground2 from "../../image/titlebackground2.svg";
 import "../../font/index.css";
-
+import vi_VN from "antd/locale/vi_VN";
+import "dayjs/locale/vi";
+dayjs.locale("vi");
 
 function Trangchu() {
   const [goiGiaDinh, setGoiGiaDinh] = useState("Gói gia đình");
@@ -71,228 +73,229 @@ function Trangchu() {
   };
 
   return (
-    <div className="bg">
-      <Image
-        src={backgroundanh}
-        preview={false}
-        style={{
-          position: "relative",
-          width: "96%",
-          height: "auto",
-          top: "-20px",
-          marginLeft: "25px",
-          marginRight: "25px",
-          borderRadius: "99px",
-        }}
-      />
-      <div className="Trangchu-image-damsen">
-        <Image src={image2} preview={false} style={{ width: "150px" }} />
-      </div>
-      <div className="Trangchu-text-damsen">
-        <Typography.Title
-          className="bold-park"
-          style={{
-            color: "white",
-            fontSize: "45px",
-            fontWeight: "900",
-            fontStyle: "normal",
-          }}
-        >
-          ĐẦM SEN <br /> PARK
-        </Typography.Title>
-      </div>
-      <div className="Trangchu-khicau1">
-        <Image src={khicau1} preview={false} style={{ width: "100px" }} />
-      </div>
-      <div className="Trangchu-khicau2">
-        <Image src={khicau2} preview={false} style={{ width: "90px" }} />
-      </div>
-      <div className="Trangchu-people">
+    <ConfigProvider locale={vi_VN}>
+      <div className="bg">
         <Image
-          src={people}
+          src={backgroundanh}
           preview={false}
-          style={{ width: "550px", marginLeft: "100px" }}
+          style={{
+            position: "relative",
+            width: "96%",
+            height: "auto",
+            top: "-20px",
+            marginLeft: "25px",
+            marginRight: "25px",
+            borderRadius: "99px",
+          }}
         />
-      </div>
-      <div className="Trangchu-sach">
-        <Image src={sach} preview={false} style={{ width: "120px" }} />
-      </div>
-      <div className="Trangchu-khicau3">
-        <Image src={khicau3} preview={false} />
-      </div>
-      <div className="Trangchu-khicau4">
-        <Image src={khicau4} preview={false} />
-      </div>
-      <div className="Trangchu-khicau5">
-        <Image src={khicau5} preview={false} />
-      </div>
-      <div className="Trangchu-khicau6">
-        <Image src={khicau6} preview={false} style={{ width: "150px" }} />
-      </div>
-      <div style={{ position: "relative" }}>
-        {/* Content */}
-        <div className="bg-sach1-shadow"></div>
-        <div className="bg-sach1"></div>
-        <div className="bg-sach1-nen">
-          <div className="content-book">
-            <Typography.Text className="montserrat content-book-font">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse ac mollis \n justo. Etiam volutpat tellus quis risus
-              volutpat, ut posuere ex facilisis.
-            </Typography.Text>
-            <br />
-            <br />
-            <Typography.Text className="montserrat content-book-font">
-              Suspendisse iaculis libero lobortis condimentum gravida. Aenean
-              auctor iaculis risus, lobortis molestie lectus consequat a.
-            </Typography.Text>
-          </div>
-          <div className="content-book-left2">
-            <Space>
-              <Image src={sao3} preview={false} />
-              <Typography.Text className="content-book-start montserrat">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-              </Typography.Text>
-            </Space>
-            <br />
-            <Space>
-              <Image src={sao3} preview={false} />
-              <Typography.Text className="content-book-start montserrat">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-              </Typography.Text>
-            </Space>
-            <br />
-            <Space>
-              <Image src={sao3} preview={false} />
-              <Typography.Text className="content-book-start montserrat">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-              </Typography.Text>
-            </Space>
-            <br />
-            <Space>
-              <Image src={sao3} preview={false} />
-              <Typography.Text className="content-book-start montserrat">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-              </Typography.Text>
-            </Space>
-          </div>
+        <div className="Trangchu-image-damsen">
+          <Image src={image2} preview={false} style={{ width: "150px" }} />
         </div>
-        {/* Booking form */}
-        <div className="bg-sach2-shadow"></div>
-        <div className="bg-sach2"></div>
-        <div className="bg-sach2-nen">
-          <div className="">
-            <Space>
-              <Input
-                className="input"
-                value="Gói gia đình"
-                onChange={(e) => setGoiGiaDinh(e.target.value)}
-              />
-              <Button className="bg-icon-button-1">
-                <Image
-                  src={down}
-                  preview={false}
-                  style={{
-                    width: "40px",
-                    marginLeft: "-18px",
-                    marginTop: "-5px",
-                  }}
+        <div className="Trangchu-text-damsen">
+          <Typography.Title
+            className="bold-park"
+            style={{
+              color: "white",
+              fontSize: "45px",
+              fontWeight: "900",
+              fontStyle: "normal",
+            }}
+          >
+            ĐẦM SEN <br /> PARK
+          </Typography.Title>
+        </div>
+        <div className="Trangchu-khicau1">
+          <Image src={khicau1} preview={false} style={{ width: "100px" }} />
+        </div>
+        <div className="Trangchu-khicau2">
+          <Image src={khicau2} preview={false} style={{ width: "90px" }} />
+        </div>
+        <div className="Trangchu-people">
+          <Image
+            src={people}
+            preview={false}
+            style={{ width: "550px", marginLeft: "100px" }}
+          />
+        </div>
+        <div className="Trangchu-sach">
+          <Image src={sach} preview={false} style={{ width: "120px" }} />
+        </div>
+        <div className="Trangchu-khicau3">
+          <Image src={khicau3} preview={false} />
+        </div>
+        <div className="Trangchu-khicau4">
+          <Image src={khicau4} preview={false} />
+        </div>
+        <div className="Trangchu-khicau5">
+          <Image src={khicau5} preview={false} />
+        </div>
+        <div className="Trangchu-khicau6">
+          <Image src={khicau6} preview={false} style={{ width: "150px" }} />
+        </div>
+        <div style={{ position: "relative" }}>
+          {/* Content */}
+          <div className="bg-sach1-shadow"></div>
+          <div className="bg-sach1"></div>
+          <div className="bg-sach1-nen">
+            <div className="content-book">
+              <Typography.Text className="montserrat content-book-font">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse ac mollis \n justo. Etiam volutpat tellus quis risus
+                volutpat, ut posuere ex facilisis.
+              </Typography.Text>
+              <br />
+              <br />
+              <Typography.Text className="montserrat content-book-font">
+                Suspendisse iaculis libero lobortis condimentum gravida. Aenean
+                auctor iaculis risus, lobortis molestie lectus consequat a.
+              </Typography.Text>
+            </div>
+            <div className="content-book-left2">
+              <Space>
+                <Image src={sao3} preview={false} />
+                <Typography.Text className="content-book-start montserrat">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+                </Typography.Text>
+              </Space>
+              <br />
+              <Space>
+                <Image src={sao3} preview={false} />
+                <Typography.Text className="content-book-start montserrat">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+                </Typography.Text>
+              </Space>
+              <br />
+              <Space>
+                <Image src={sao3} preview={false} />
+                <Typography.Text className="content-book-start montserrat">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+                </Typography.Text>
+              </Space>
+              <br />
+              <Space>
+                <Image src={sao3} preview={false} />
+                <Typography.Text className="content-book-start montserrat">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+                </Typography.Text>
+              </Space>
+            </div>
+          </div>
+          {/* Booking form */}
+          <div className="bg-sach2-shadow"></div>
+          <div className="bg-sach2"></div>
+          <div className="bg-sach2-nen">
+            <div className="">
+              <Space>
+                <Input
+                  className="input"
+                  value="Gói gia đình"
+                  onChange={(e) => setGoiGiaDinh(e.target.value)}
                 />
-              </Button>
-              <div className="bg-icon-button-1-1"></div>
-            </Space>
-            <Space>
-              <Input
-                className="input1"
-                placeholder="Số lượng vé"
-                value={soLuongVe}
-                onChange={(e) => setSoLuongVe(e.target.value)}
-              />
-              <Input
-                className="input2"
-                placeholder="Ngày sử dụng"
-                value={date}
-              />
-              <div className="bg-icon-button-2">
-                <Image
-                  src={calender}
-                  preview={false}
-                  style={{
-                    width: "20px",
-                    marginLeft: "8px",
-                    marginTop: "5px",
-                  }}
-                />
-                <div>
-                  <DatePicker
-                 
-                    className="date"
-                    onChange={dateChange}
-                    style={{ opacity: "0" }}
+                <Button className="bg-icon-button-1">
+                  <Image
+                    src={down}
+                    preview={false}
+                    style={{
+                      width: "40px",
+                      marginLeft: "-18px",
+                      marginTop: "-5px",
+                    }}
                   />
+                </Button>
+                <div className="bg-icon-button-1-1"></div>
+              </Space>
+              <Space>
+                <Input
+                  className="input1"
+                  placeholder="Số lượng vé"
+                  value={soLuongVe}
+                  onChange={(e) => setSoLuongVe(e.target.value)}
+                />
+                <Input
+                  className="input2"
+                  placeholder="Ngày sử dụng"
+                  value={date}
+                />
+                <div className="bg-icon-button-2">
+                  <Image
+                    src={calender}
+                    preview={false}
+                    style={{
+                      width: "20px",
+                      marginLeft: "8px",
+                      marginTop: "5px",
+                    }}
+                  />
+                  <div>
+                    <DatePicker
+                      className="date"
+                      onChange={dateChange}
+                      style={{ opacity: "0" }}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="bg-icon-button-2-2"></div>
-            </Space>
-            <Input
-              className="input3"
-              placeholder="Họ và tên"
-              value={hoTen}
-              onChange={(e) => setHoTen(e.target.value)}
-            />
-            <Input
-              className="input4"
-              placeholder="Số điện thoại"
-              value={soDienThoai}
-              onChange={(e) => setSoDienThoai(e.target.value)}
-            />
-            <Input
-              className="input5"
-              placeholder="Địa chỉ email"
-              value={diaChiEmail}
-              onChange={(e) => setDiaChiEmail(e.target.value)}
-            />
-            <Button
-              className="button bold-park"
-              style={{
-                backgroundColor: "#ff000a",
-                color: "#fff",
-                fontSize: "24px",
-                fontStyle: "normal",
-                fontWeight: "900",
-                lineHeight: "normal",
-              }}
-              onClick={handleBookTicket}
-            >
-              Đặt vé
-            </Button>
-            <div className="bg-button "></div>
+                <div className="bg-icon-button-2-2"></div>
+              </Space>
+              <Input
+                className="input3"
+                placeholder="Họ và tên"
+                value={hoTen}
+                onChange={(e) => setHoTen(e.target.value)}
+              />
+              <Input
+                className="input4"
+                placeholder="Số điện thoại"
+                value={soDienThoai}
+                onChange={(e) => setSoDienThoai(e.target.value)}
+              />
+              <Input
+                className="input5"
+                placeholder="Địa chỉ email"
+                value={diaChiEmail}
+                onChange={(e) => setDiaChiEmail(e.target.value)}
+              />
+              <Button
+                className="button bold-park"
+                style={{
+                  backgroundColor: "#ff000a",
+                  color: "#fff",
+                  fontSize: "24px",
+                  fontStyle: "normal",
+                  fontWeight: "900",
+                  lineHeight: "normal",
+                }}
+                onClick={handleBookTicket}
+              >
+                Đặt vé
+              </Button>
+              <div className="bg-button "></div>
+            </div>
+          </div>
+
+          {/* Title background red */}
+          <div>
+            <div className="title-background-2">
+              <Image src={titlebackground2} preview={false} />
+            </div>
+            <div className="title-background">
+              <Image src={titlebackground} preview={false} />
+            </div>
+            <div className="borderbackground">
+              <Image src={borderbackground} preview={false} />
+            </div>
+            <div className="title-background-red">
+              <Typography.Text className="bold-park content-background-red ">
+                VÉ CỦA BẠN
+              </Typography.Text>
+            </div>
           </div>
         </div>
 
-        {/* Title background red */}
-        <div>
-          <div className="title-background-2">
-            <Image src={titlebackground2} preview={false} />
-          </div>
-          <div className="title-background">
-            <Image src={titlebackground} preview={false} />
-          </div>
-          <div className="borderbackground">
-            <Image src={borderbackground} preview={false} />
-          </div>
-          <div className="title-background-red">
-            <Typography.Text className="bold-park content-background-red ">
-              VÉ CỦA BẠN
-            </Typography.Text>
-          </div>
+        <div className="image-lisa">
+          <Image src={Lisa} preview={false} />
         </div>
       </div>
-
-      <div className="image-lisa">
-        <Image src={Lisa} preview={false} />
-      </div>
-    </div>
+    </ConfigProvider>
   );
 }
 

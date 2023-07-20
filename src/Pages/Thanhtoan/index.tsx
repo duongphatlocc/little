@@ -7,6 +7,7 @@ import {
   Button,
   Modal,
   DatePicker,
+  ConfigProvider,
 } from "antd";
 import sach from "../../image/sach.svg";
 import Trini from "../../image/Trini.svg";
@@ -21,6 +22,9 @@ import { ThanhtoanData, updateThanhtoan } from "../../firebase/thanhtoanSlice";
 import { useDispatch } from "react-redux";
 import "../../css/thanhtoan.css";
 import facesad from "../../image/facesad.svg";
+import vi_VN from "antd/locale/vi_VN";
+import "dayjs/locale/vi";
+dayjs.locale("vi");
 
 function Thanhtoan() {
   const { id } = useParams();
@@ -119,208 +123,221 @@ function Thanhtoan() {
   }, [id]);
 
   return (
-    <div>
-      <Background />
-      <br />
-      <Typography.Title
-        className="bold-park title-thanh-toan"
-        style={{
-          color: "#fff",
-          fontSize: "60px",
-          fontWeight: "900",
-          fontStyle: "normal",
-          lineHeight: "100px",
-        }}
-      >
-        Thanh toán
-      </Typography.Title>
-      <Image
-        src={sach}
-        preview={false}
-        className="thanh-toan-sach"
-        style={{ height: "440px" }}
-      />
+    <ConfigProvider locale={vi_VN}>
       <div>
-        <div className="thanh-toan-bg-left-shadow" />
-        <div className="thanh-toan-bg-left" />
+        <Background />
+        <br />
+        <Typography.Title
+          className="bold-park title-thanh-toan"
+          style={{
+            color: "#fff",
+            fontSize: "60px",
+            fontWeight: "900",
+            fontStyle: "normal",
+            lineHeight: "100px",
+          }}
+        >
+          Thanh toán
+        </Typography.Title>
+        <Image
+          src={sach}
+          preview={false}
+          className="thanh-toan-sach"
+          style={{ height: "440px" }}
+        />
         <div>
-          <div className="thanh-toan-bg-left-content">
-            <Image src={vecong} preview={false} className="vecong" />
-            <Typography.Title
-              className="bold-park vecong-thanh-toan"
-              style={{
-                color: "#fff",
-                fontSize: "24px",
-                fontStyle: "normal",
-                fontWeight: "900",
-                lineHeight: "normal",
-              }}
-            >
-              VÉ CỔNG - VÉ GIA ĐÌNH
-            </Typography.Title>
-            <Space>
-              <Typography.Text className="group-text-1">
-                Số tiền thanh toán
-              </Typography.Text>
-              <Typography.Text
-                className="group-text-1"
-                style={{ marginLeft: "50px" }}
+          <div className="thanh-toan-bg-left-shadow" />
+          <div className="thanh-toan-bg-left" />
+          <div>
+            <div className="thanh-toan-bg-left-content">
+              <Image src={vecong} preview={false} className="vecong" />
+              <Typography.Title
+                className="bold-park vecong-thanh-toan"
+                style={{
+                  color: "#fff",
+                  fontSize: "24px",
+                  fontStyle: "normal",
+                  fontWeight: "900",
+                  lineHeight: "normal",
+                }}
               >
-                Số lượng vé
-              </Typography.Text>
-              <Typography.Text
-                className="group-text-1"
-                style={{ marginLeft: "40px" }}
-              >
-                Ngày sử dụng
-              </Typography.Text>
-            </Space>
-            <Space>
-              <Input
-                className="group-input-1"
-                value={`${gia.toFixed(3)} VNĐ`}
-              />
-              <Input
-                className="input-thanhtoan-1"
-                value={thanhtoans?.soLuongVe}
-              />
-              vé
-              <Input
-                className="input-thanhtoan-2"
-                value={thanhtoans?.ngaySuDung}
-              />
-            </Space>
-
-            <div style={{ marginTop: "5px" }}>
-              <Typography.Text className="group-text-1">
-                Thông tin liên hệ
-              </Typography.Text>
-              <br />
-              <Input className="input-thanhtoan-3" value={thanhtoans?.hoTen} />
-            </div>
-            <div style={{ marginTop: "5px" }}>
-              <Typography.Text className="group-text-1">
-                Điện thoại
-              </Typography.Text>
-              <br />
-              <Input
-                className="group-input-1"
-                value={thanhtoans?.soDienThoai}
-              />
-            </div>
-
-            <div style={{ marginTop: "5px" }}>
-              <Typography.Text className="group-text-1">Email</Typography.Text>
-              <br />
-              <Input
-                className="input-thanhtoan-3"
-                value={thanhtoans?.diaChiEmail}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="thanh-toan-bg-right-shadow" />
-        <div className="thanh-toan-bg-right" />
-        <div className="thanh-toan-bg-right-content">
-          <Image src={vecong} preview={false} className="thongtin-thanhtoan" />
-          <Typography.Title
-            style={{
-              color: "#fff",
-              fontSize: "24px",
-              fontStyle: "normal",
-              fontWeight: "900",
-              lineHeight: "normal",
-              position: "absolute",
-              zIndex: "1",
-              top: "-34px",
-              left: "65px",
-            }}
-            className="bold-park"
-          >
-            THÔNG TIN THANH TOÁN
-          </Typography.Title>
-          <div style={{ marginTop: "10px" }}>
-            <Typography.Text className="group-text-2">Số thẻ</Typography.Text>
-            <br />
-            <Input
-              className="group-input-2"
-              value={soThe}
-              onChange={handleSoTheChange}
-              maxLength={soThe?.length === 16 ? 20 : 23}
-            />
-          </div>
-          <div style={{ marginTop: "5px" }}>
-            <Typography.Text className="group-text-2">
-              Họ tên chủ thẻ
-            </Typography.Text>
-            <br />
-            <Input className="group-input-2" />
-          </div>
-          <div style={{ marginTop: "5px" }}>
-            <Typography.Text className="group-text-2">
-              Ngày hết hạn
-            </Typography.Text>
-            <br />
-            <Space>
-              <Input className="group-input-3" value={ngay} />
-              <div className="bg-icon-button-pay-shadow" />
-              <div className="bg-ngay-het-han" style={{ marginTop: "-5px" }}>
-                <Image
-                  src={calender}
-                  preview={false}
-                  style={{
-                    width: "20px",
-                    marginLeft: "8px",
-                    marginTop: "5px",
-                  }}
+                VÉ CỔNG - VÉ GIA ĐÌNH
+              </Typography.Title>
+              <Space>
+                <Typography.Text className="group-text-1">
+                  Số tiền thanh toán
+                </Typography.Text>
+                <Typography.Text
+                  className="group-text-1"
+                  style={{ marginLeft: "50px" }}
+                >
+                  Số lượng vé
+                </Typography.Text>
+                <Typography.Text
+                  className="group-text-1"
+                  style={{ marginLeft: "40px" }}
+                >
+                  Ngày sử dụng
+                </Typography.Text>
+              </Space>
+              <Space>
+                <Input
+                  className="group-input-1"
+                  value={`${gia.toFixed(3)} VNĐ`}
                 />
-                <div>
-                  <DatePicker
-                    className="ngayhethan"
-                    onChange={ngayHetHan}
-                    style={{ opacity: "0" }}
-                  />
-                </div>
+                <Input
+                  className="input-thanhtoan-1"
+                  value={thanhtoans?.soLuongVe}
+                />
+                vé
+                <Input
+                  className="input-thanhtoan-2"
+                  value={thanhtoans?.ngaySuDung}
+                />
+              </Space>
+
+              <div style={{ marginTop: "5px" }}>
+                <Typography.Text className="group-text-1">
+                  Thông tin liên hệ
+                </Typography.Text>
+                <br />
+                <Input
+                  className="input-thanhtoan-3"
+                  value={thanhtoans?.hoTen}
+                />
               </div>
-            </Space>
+              <div style={{ marginTop: "5px" }}>
+                <Typography.Text className="group-text-1">
+                  Điện thoại
+                </Typography.Text>
+                <br />
+                <Input
+                  className="group-input-1"
+                  value={thanhtoans?.soDienThoai}
+                />
+              </div>
+
+              <div style={{ marginTop: "5px" }}>
+                <Typography.Text className="group-text-1">
+                  Email
+                </Typography.Text>
+                <br />
+                <Input
+                  className="input-thanhtoan-3"
+                  value={thanhtoans?.diaChiEmail}
+                />
+              </div>
+            </div>
           </div>
-          <div style={{ marginTop: "5px" }}>
-            <Typography.Text className="group-text-2">CVV/CVC</Typography.Text>
-            <br />
-            <Input
-              className="group-input-4"
-              value={cvv2} // Hiển thị dấu sao (•••)
-              onChange={handleCvvChange} // Xử lý thay đổi CVV/CVC và cập nhật hiển thị dấu sao
-              type="text" // Hiển thị dấu sao (do đã thay đổi trong handleCvvChange)
-              maxLength={3} // Giới hạn độ dài là 3 ký tự
+
+          <div className="thanh-toan-bg-right-shadow" />
+          <div className="thanh-toan-bg-right" />
+          <div className="thanh-toan-bg-right-content">
+            <Image
+              src={vecong}
+              preview={false}
+              className="thongtin-thanhtoan"
             />
-          </div>
-          <div className="button-thanhtoan-shadow" />
-          <div className="button-thanhtoan-bg-red">
-            <Button
-              onClick={handleThanhtoan}
-              className="button-text-thanhtoan bold-park"
+            <Typography.Title
               style={{
-                backgroundColor: "#ff000a",
                 color: "#fff",
                 fontSize: "24px",
                 fontStyle: "normal",
                 fontWeight: "900",
                 lineHeight: "normal",
-                width: "289px",
-                marginLeft: "0px",
-                borderRadius: "1rem",
-                height: "50px",
+                position: "absolute",
+                zIndex: "1",
+                top: "-34px",
+                left: "65px",
               }}
+              className="bold-park"
             >
-              Thanh toán
-            </Button>
+              THÔNG TIN THANH TOÁN
+            </Typography.Title>
+            <div style={{ marginTop: "10px" }}>
+              <Typography.Text className="group-text-2">Số thẻ</Typography.Text>
+              <br />
+              <Input
+                className="group-input-2"
+                value={soThe}
+                onChange={handleSoTheChange}
+                maxLength={soThe?.length === 16 ? 20 : 23}
+              />
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              <Typography.Text className="group-text-2">
+                Họ tên chủ thẻ
+              </Typography.Text>
+              <br />
+              <Input className="group-input-2" />
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              <Typography.Text className="group-text-2">
+                Ngày hết hạn
+              </Typography.Text>
+              <br />
+              <Space>
+                <Input className="group-input-3" value={ngay} />
+                <div className="bg-icon-button-pay-shadow" />
+                <div className="bg-ngay-het-han" style={{ marginTop: "-5px" }}>
+                  <Image
+                    src={calender}
+                    preview={false}
+                    style={{
+                      width: "20px",
+                      marginLeft: "8px",
+                      marginTop: "5px",
+                    }}
+                  />
+                  <div>
+                    <DatePicker
+                      className="ngayhethan"
+                      onChange={ngayHetHan}
+                      style={{ opacity: "0" }}
+                    />
+                  </div>
+                </div>
+              </Space>
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              <Typography.Text className="group-text-2">
+                CVV/CVC
+              </Typography.Text>
+              <br />
+              <Input
+                className="group-input-4"
+                value={cvv2} // Hiển thị dấu sao (•••)
+                onChange={handleCvvChange} // Xử lý thay đổi CVV/CVC và cập nhật hiển thị dấu sao
+                type="text" // Hiển thị dấu sao (do đã thay đổi trong handleCvvChange)
+                maxLength={3} // Giới hạn độ dài là 3 ký tự
+              />
+            </div>
+            <div className="button-thanhtoan-shadow" />
+            <div className="button-thanhtoan-bg-red">
+              <Button
+                onClick={handleThanhtoan}
+                className="button-text-thanhtoan bold-park"
+                style={{
+                  backgroundColor: "#ff000a",
+                  color: "#fff",
+                  fontSize: "24px",
+                  fontStyle: "normal",
+                  fontWeight: "900",
+                  lineHeight: "normal",
+                  width: "289px",
+                  marginLeft: "0px",
+                  borderRadius: "1rem",
+                  height: "50px",
+                }}
+              >
+                Thanh toán
+              </Button>
+            </div>
           </div>
         </div>
+        <Image src={Trini} preview={false} className="Trini" />
       </div>
-      <Image src={Trini} preview={false} className="Trini" />
-    </div>
+    </ConfigProvider>
   );
 }
 
